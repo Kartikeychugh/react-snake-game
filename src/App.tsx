@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import "./App.css";
 
-function App() {
+import { GameBoardComponent } from "./features/game-board/game-board.component";
+import { ScoreBoardComponent } from "./features/score-board/score-baord.component";
+import { createStore } from "./store/store";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Provider
+        store={createStore({
+          boardHeight: 300,
+          boardWidth: 300,
+          initialSnakeBlocks: 10,
+          blockWidth: 10,
+          level: 2,
+        })}
+      >
+        <GameBoardComponent />
+        <ScoreBoardComponent />
+      </Provider>
     </div>
   );
-}
+};
 
 export default App;
