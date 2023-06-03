@@ -8,20 +8,19 @@
 
 .game-board {
   position: relative;
-  background-color: #dbebdd;
   overflow: hidden;
   box-sizing: border-box;
 }
 
 .score-board {
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 100px;
   position: absolute;
-  color: #94c298;
+  color: rgb(40, 133, 48);
 }
 
 .block {
@@ -43,8 +42,6 @@
 }
 
 .past-score-list {
-  padding: 10px;
-  box-shadow: 0 0 8px lightgrey;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -56,6 +53,9 @@
   align-items: center;
   height: 30px;
   border-bottom: 1px solid rgba(148, 194, 152, 0.3);
+  font-size: large;
+  font-weight: bold;
+  color: #288530;
 }
 
 @keyframes flickerAnimation {

@@ -3,7 +3,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FruitComponent } from "../fruit/fruit.component";
 import { SnakeComponent } from "../snake/snake.component";
 import { GAME_STATE } from "../../constants";
-import { pauseGame, restartGame, startGame } from "./game-board.slice";
+import {
+  pauseGame,
+  restartGame,
+  setLevel,
+  startGame,
+} from "./game-board.slice";
 import { resetSnake } from "../snake/snake.slice";
 import { generateFruitAsync } from "../fruit/fruit.slice";
 import { resetScore } from "../score-board/score-board.slice";
@@ -14,7 +19,12 @@ export const GameBoardComponent = () => {
   const { boardHeight, boardWidth, status, reason } = useAppSelector(
     (state) => state.gameBoard
   );
+  const { fruitsEaten } = useAppSelector((state) => state.scoreBoard);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setLevel(Math.floor(fruitsEaten / 10) + 1));
+  }, [dispatch, fruitsEaten]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
@@ -36,22 +46,20 @@ export const GameBoardComponent = () => {
 
   return (
     <div
+      className="game-board"
       style={{
-        boxShadow: "0 0 10px lightgrey",
+        boxShadow:
+          reason === GAME_END_REASON.BOUNDARY_COLLISION
+            ? "0 0 5px inset red"
+            : "0 0 5px inset #288530",
+        backgroundColor: " #dbebdd",
         width: boardWidth,
         height: boardHeight,
       }}
     >
-      <div
-        className={`game-board ${
-          reason === GAME_END_REASON.BOUNDARY_COLLISION ? "error-border" : ""
-        }`}
-        style={{ width: boardWidth, height: boardHeight }}
-      >
-        <FruitComponent />
-        <SnakeComponent />
-        <CurrentScoreBoardComponent />
-      </div>
+      <FruitComponent />
+      <SnakeComponent />
+      <CurrentScoreBoardComponent />
     </div>
   );
 };

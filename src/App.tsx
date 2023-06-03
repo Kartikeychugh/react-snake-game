@@ -11,14 +11,22 @@ const App = () => {
       <Provider
         store={createStore({
           boardHeight: 500,
-          boardWidth: 500,
+          boardWidth: 700,
           initialSnakeBlocks: 10,
           blockWidth: 15,
-          level: 5,
+          level: 2,
         })}
       >
-        <GameBoardComponent />
-        <PastScoreBoardComponent />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            boxShadow: "0 0 8px lightgrey",
+          }}
+        >
+          <GameBoardComponent />
+          <PastScoreBoardComponent />
+        </div>
       </Provider>
     </div>
   );
@@ -27,11 +35,9 @@ const App = () => {
 export default App;
 
 /**
- * Score history
  * Support local storage
  * Host on firebase
  * Use firebase database to store scores
- * Incremental speed
  * Bonus fruits
  * Power ups
  */

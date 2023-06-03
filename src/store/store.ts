@@ -48,7 +48,7 @@ export const createStore = (configuration: {
         reason: null,
       },
       fruit: { location: generateFruit(boardHeight, boardWidth, blockWidth) },
-      scoreBoard: { currentScore: 0, pastScores: [] },
+      scoreBoard: { currentScore: 0, pastScores: [], fruitsEaten: 0 },
     },
   });
 };

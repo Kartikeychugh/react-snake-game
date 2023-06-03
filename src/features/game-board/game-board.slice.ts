@@ -30,9 +30,12 @@ export const gameBoardSlice = createSlice({
       state.status = GAME_STATE.PAUSED;
       state.reason = null;
     },
+    setLevel: (state, action: PayloadAction<number>) => {
+      state.level = action.payload;
+    },
   },
 });
 
-export const { pauseGame, startGame, endGame, restartGame } =
+export const { pauseGame, startGame, endGame, restartGame, setLevel } =
   gameBoardSlice.actions;
 export const gameBoardReducer = gameBoardSlice.reducer;

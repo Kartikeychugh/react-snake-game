@@ -6,7 +6,10 @@ import { useAnimate } from "../../hooks/use-animate";
 import { endGame } from "../game-board/game-board.slice";
 import { generateFruitAsync } from "../fruit/fruit.slice";
 import { collisionCheck, outboundCheck } from "./utils";
-import { incrementScore } from "../score-board/score-board.slice";
+import {
+  incrementFruitsEaten,
+  incrementScore,
+} from "../score-board/score-board.slice";
 import { GAME_END_REASON } from "../../models";
 
 export const SnakeComponent = () => {
@@ -14,6 +17,7 @@ export const SnakeComponent = () => {
   const { blockWidth, level, status, reason } = useAppSelector(
     (state) => state.gameBoard
   );
+
   const dispatch = useAppDispatch();
 
   useOutboundCheck();
@@ -53,13 +57,13 @@ export const SnakeComponent = () => {
             width: blockWidth,
             top: block.x,
             left: block.y,
+            zIndex: 1,
             ...(index === 0
               ? {
                   background:
                     reason === GAME_END_REASON.SELF_COLLISION
                       ? "#cc3333"
                       : "#288530",
-                  zIndex: 1,
                 }
               : {}),
           }}
@@ -80,6 +84,7 @@ const useFruitConsumedCheck = () => {
       dispatch(generateFruitAsync());
       dispatch(incrementScore(level * 2));
       dispatch(increaseBody());
+      dispatch(incrementFruitsEaten());
     }
   }, [body, location.x, location.y, dispatch, level]);
 };

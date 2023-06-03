@@ -4,6 +4,7 @@ import { endGame } from "../game-board/game-board.slice";
 
 const initialState: IScoreBoardState = {
   currentScore: 0,
+  fruitsEaten: 0,
   pastScores: [],
 };
 
@@ -16,6 +17,10 @@ export const scoreBoardSlice = createSlice({
     },
     resetScore: (state) => {
       state.currentScore = 0;
+      state.fruitsEaten = 0;
+    },
+    incrementFruitsEaten: (state) => {
+      state.fruitsEaten += 1;
     },
   },
   extraReducers: (builder) => {
@@ -26,4 +31,5 @@ export const scoreBoardSlice = createSlice({
 });
 
 export const scoreBoardReducer = scoreBoardSlice.reducer;
-export const { incrementScore, resetScore } = scoreBoardSlice.actions;
+export const { incrementScore, resetScore, incrementFruitsEaten } =
+  scoreBoardSlice.actions;
