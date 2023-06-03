@@ -3,13 +3,15 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FruitComponent } from "../fruit/fruit.component";
 import { SnakeComponent } from "../snake/snake.component";
 import { GAME_STATE } from "../../constants";
-import { pauseGame, startGame } from "./game-board.slice";
+import { pauseGame, restartGame, startGame } from "./game-board.slice";
 import { resetSnake } from "../snake/snake.slice";
 import { generateFruitAsync } from "../fruit/fruit.slice";
 import { resetScore } from "../score-board/score-board.slice";
+import { GAME_END_REASON } from "../../models";
+import { CurrentScoreBoardComponent } from "../score-board/current-score-board.component";
 
 export const GameBoardComponent = () => {
-  const { boardHeight, boardWidth, status } = useAppSelector(
+  const { boardHeight, boardWidth, status, reason } = useAppSelector(
     (state) => state.gameBoard
   );
   const dispatch = useAppDispatch();
@@ -20,7 +22,7 @@ export const GameBoardComponent = () => {
       if (status === GAME_STATE.PAUSED) dispatch(startGame());
       if (status === GAME_STATE.PLAY) dispatch(pauseGame());
       if (status === GAME_STATE.END) {
-        dispatch(pauseGame());
+        dispatch(restartGame());
         dispatch(resetSnake());
         dispatch(generateFruitAsync());
         dispatch(resetScore());
@@ -33,9 +35,23 @@ export const GameBoardComponent = () => {
   }, [dispatch, status]);
 
   return (
-    <div className="board" style={{ width: boardWidth, height: boardHeight }}>
-      <FruitComponent />
-      <SnakeComponent />
+    <div
+      style={{
+        boxShadow: "0 0 10px lightgrey",
+        width: boardWidth,
+        height: boardHeight,
+      }}
+    >
+      <div
+        className={`game-board ${
+          reason === GAME_END_REASON.BOUNDARY_COLLISION ? "error-border" : ""
+        }`}
+        style={{ width: boardWidth, height: boardHeight }}
+      >
+        <FruitComponent />
+        <SnakeComponent />
+        <CurrentScoreBoardComponent />
+      </div>
     </div>
   );
 };

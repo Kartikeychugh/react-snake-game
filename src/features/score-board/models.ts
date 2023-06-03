@@ -1,3 +1,4 @@
 export interface IScoreBoardState {
-  score: number;
+  currentScore: number;
+  pastScores: number[];
 }

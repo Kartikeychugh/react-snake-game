@@ -1,20 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IScoreBoardState } from "./models";
+import { endGame } from "../game-board/game-board.slice";
 
 const initialState: IScoreBoardState = {
-  score: 0,
+  currentScore: 0,
+  pastScores: [],
 };
 
 export const scoreBoardSlice = createSlice({
   name: "score",
   initialState,
   reducers: {
-    incrementScore: (state) => {
-      state.score += 10;
+    incrementScore: (state, action: PayloadAction<number>) => {
+      state.currentScore += action.payload;
     },
     resetScore: (state) => {
-      state.score = 0;
+      state.currentScore = 0;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(endGame, (state) => {
+      state.pastScores = [state.currentScore, ...state.pastScores];
+    });
   },
 });
 

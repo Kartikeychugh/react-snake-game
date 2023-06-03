@@ -45,9 +45,10 @@ export const createStore = (configuration: {
         status: GAME_STATE.PAUSED,
         blockWidth,
         level,
+        reason: null,
       },
       fruit: { location: generateFruit(boardHeight, boardWidth, blockWidth) },
-      scoreBoard: { score: 0 },
+      scoreBoard: { currentScore: 0, pastScores: [] },
     },
   });
 };

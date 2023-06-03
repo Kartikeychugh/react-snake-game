@@ -3,30 +3,77 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  justify-content: space-evenly;
 }
 
-.board {
-  box-shadow: 0 0 5px inset #288530;
+.game-board {
   position: relative;
   background-color: #dbebdd;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+.score-board {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  position: absolute;
+  color: #94c298;
 }
 
 .block {
   position: absolute;
   background-color: #94c298;
-
   border: 1px white solid;
 }
 
 .fruit {
   position: absolute;
   background-color: #ff872a;
-
+  z-index: 1;
   box-sizing: border-box;
 }
 
 .game {
   display: flex;
   flex-direction: column;
+}
+
+.past-score-list {
+  padding: 10px;
+  box-shadow: 0 0 8px lightgrey;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.past-score-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  border-bottom: 1px solid rgba(148, 194, 152, 0.3);
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-flicker {
+  animation: flickerAnimation 0.5s infinite;
+}
+
+.error-border {
+  border: 3px solid #cc3333;
 }
