@@ -70,8 +70,28 @@
   }
 }
 
+@keyframes flickerBorder {
+  50% {
+    border-color: white;
+  }
+}
+
+@keyframes flickerBoxShadow {
+  50% {
+    box-shadow: "0 0 0 red";
+  }
+}
+
 .animate-flicker {
   animation: flickerAnimation 0.5s infinite;
+}
+
+.animate-border-flicker {
+  animation: flickerBorder 0.5s infinite;
+}
+
+.animate-boxShadow-flicker {
+  animation: flickerBorder 0.5s infinite;
 }
 
 .error-border {

@@ -7,7 +7,7 @@ export const CurrentScoreBoardComponent = () => {
   return (
     <div
       className="score-board"
-      style={{ opacity: status === GAME_STATE.PLAY ? 0.3 : 1 }}
+      style={{ opacity: status === GAME_STATE.PLAY ? 0.2 : 1 }}
     >
       <div> {currentScore}</div>
     </div>

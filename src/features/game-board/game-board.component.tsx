@@ -46,15 +46,18 @@ export const GameBoardComponent = () => {
 
   return (
     <div
-      className="game-board"
+      className="game-board "
       style={{
         boxShadow:
           reason === GAME_END_REASON.BOUNDARY_COLLISION
-            ? "0 0 5px inset red"
+            ? "0 0 10px red inset"
             : "0 0 5px inset #288530",
         backgroundColor: " #dbebdd",
         width: boardWidth,
         height: boardHeight,
+        ...(reason === GAME_END_REASON.BOUNDARY_COLLISION
+          ? { border: "2px solid red" }
+          : {}),
       }}
     >
       <FruitComponent />
